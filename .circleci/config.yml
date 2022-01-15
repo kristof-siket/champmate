@@ -14,9 +14,16 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+      - run: 
+          name: Frontend - Install dependencies
+          command: cd chm-ui/chm-react && yarn
+      - run: 
+          name: Frontend - Build React app
+          command: cd chm-ui/chm-react && yarn build
+      - sonarcloud/scan
+
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.1
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
