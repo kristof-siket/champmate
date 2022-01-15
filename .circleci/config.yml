@@ -31,4 +31,4 @@ workflows:
   dev-workflpw:
     jobs:
       - build-dev
-        context: SONAR_TOKEN
+          context: SONAR_TOKEN
