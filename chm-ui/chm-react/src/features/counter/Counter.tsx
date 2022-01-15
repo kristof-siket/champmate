@@ -9,7 +9,8 @@ import {
   incrementIfOdd,
   selectCount,
 } from './counterSlice';
-import styles from './Counter.module.css';
+import { Button, Input, Box, Text, Stack } from "@chakra-ui/react"
+
 
 export function Counter() {
   const count = useAppSelector(selectCount);
@@ -19,50 +20,32 @@ export function Counter() {
   const incrementValue = Number(incrementAmount) || 0;
 
   return (
-    <div>
-      <div className={styles.row}>
-        <button
-          className={styles.button}
-          aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
-        >
-          -
-        </button>
-        <span className={styles.value}>{count}</span>
-        <button
-          className={styles.button}
-          aria-label="Increment value"
-          onClick={() => dispatch(increment())}
-        >
-          +
-        </button>
-      </div>
-      <div className={styles.row}>
-        <input
-          className={styles.textbox}
-          aria-label="Set increment amount"
+    <Box alignItems='center' justifyContent='center' align='center'>
+      <Stack alignItems='center' justifyContent='center' align='center' direction="row" spacing={1}>
+        <Button colorScheme='teal' onClick={() => dispatch(decrement())}>-</Button>
+        <Text>{count}</Text>
+        <Button colorScheme='teal' onClick={() => dispatch(increment())}>+</Button>
+      </Stack>
+      <Box>
+      <Input
+          margin={5}
           value={incrementAmount}
+          size="lg"
+          placeholder='Amount'
           onChange={(e) => setIncrementAmount(e.target.value)}
         />
-        <button
-          className={styles.button}
-          onClick={() => dispatch(incrementByAmount(incrementValue))}
-        >
+      <Stack direction="row" spacing={2}>
+        <Button colorScheme='teal' variant='solid' onClick={() => dispatch(incrementByAmount(incrementValue))}>
           Add Amount
-        </button>
-        <button
-          className={styles.asyncButton}
-          onClick={() => dispatch(incrementAsync(incrementValue))}
-        >
+        </Button>
+        <Button colorScheme='teal' variant='outline' onClick={() => dispatch(incrementAsync(incrementValue))}>
           Add Async
-        </button>
-        <button
-          className={styles.button}
-          onClick={() => dispatch(incrementIfOdd(incrementValue))}
-        >
-          Add If Odd
-        </button>
-      </div>
-    </div>
+        </Button>
+        <Button colorScheme='teal' variant='outline' onClick={() => dispatch(incrementIfOdd(incrementValue))}>
+          Add if odd
+        </Button>
+      </Stack>
+      </Box>
+    </Box>
   );
 }
